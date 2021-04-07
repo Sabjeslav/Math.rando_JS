@@ -13,25 +13,29 @@ for (let i = 0; i < 10; i++) {
   Поле age заполняется рандомно от 12 до 50 лет. (Только целые числа).
   Поле isMale заполняется рандомно значениями true или false. */
 
-
-const NATIONALITIES = [
-  'ua', 'uk', 'fr', 'ge', 'swe', 'us'
-]
+const NATIONALITIES = ["ua", "uk", "fr", "ge", "swe", "us"];
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
 function getRandomBoolean() {
-  return (Math.random() < 0.5);
+  return Math.random() < 0.5;
 }
 
-function getNationalities () {
-  return NATIONALITIES[getRandomInt(0, NATIONALITIES.length)]
+function getNationalities() {
+  return NATIONALITIES[getRandomInt(0, NATIONALITIES.length)];
 }
-  
 
-const User = function (fName, lName, email, age, nationality, isMale, isSubscribed) {
+const User = function (
+  fName,
+  lName,
+  email,
+  age,
+  nationality,
+  isMale,
+  isSubscribed
+) {
   this.fName = fName;
   this.lName = lName;
   this.email = email;
@@ -39,16 +43,22 @@ const User = function (fName, lName, email, age, nationality, isMale, isSubscrib
   this.nationality = nationality;
   this.isMale = isMale;
   this.isSubscribed = isSubscribed;
-}
+};
 
 function UserProto() {
   this.getFullName = function getFullName() {
-    return (`${this.fName} ${this.lName}`);
-  }
+    return `${this.fName} ${this.lName}`;
+  };
+}
+
+function filterArray(array) {
+  return array.filter(function (user) {
+    return user.age >= 18 && !user.isMale && user.isSubscribed;
+  });
 }
 
 User.prototype = new UserProto();
-  
+
 function createObjects(amount) {
   const userArray = [];
   for (let i = 0; i < amount; i++) {
@@ -59,10 +69,19 @@ function createObjects(amount) {
     const nationality = getNationalities();
     const isMale = getRandomBoolean();
     const isSubscribed = getRandomBoolean();
-    const user = new User(fName, lName, email, age, nationality, isMale, isSubscribed);
-    userArray.push(user)
+    const user = new User(
+      fName,
+      lName,
+      email,
+      age,
+      nationality,
+      isMale,
+      isSubscribed
+    );
+    userArray.push(user);
   }
   return userArray;
 }
 
-console.log(createObjects(5));
+const usersList = createObjects(5);
+console.log(usersList);
