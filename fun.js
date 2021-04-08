@@ -15,8 +15,6 @@ const rangeCounter = (from, to) => {
 };
 
 
-function capitalize(string) {
-  return (string.split(' ').map((item) => item[0].toUpperCase() + item.slice(1)).join(' '));
-}
+const capitalize = (string) => {return (string.split(' ').map((item) => item[0].toUpperCase() + item.slice(1)).join(' '))};
 
 console.log(capitalize('I want pizza!'));
